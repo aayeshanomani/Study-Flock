@@ -1,4 +1,4 @@
-# shopoid
+# Study Flock
 
 A new Flutter project.
 
