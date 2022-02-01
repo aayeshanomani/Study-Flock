@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shopoid/screens/studentScreens/home.dart';
+import 'package:shopoid/services/database.dart';
 
 class StudentRegister extends StatefulWidget {
   const StudentRegister();
@@ -9,6 +10,7 @@ class StudentRegister extends StatefulWidget {
 }
 
 class _StudentRegisterState extends State<StudentRegister> {
+  String name = "", email = "", password = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,6 +42,11 @@ class _StudentRegisterState extends State<StudentRegister> {
               Padding(
                 padding: EdgeInsets.all(10),
                 child: TextField(
+                  onChanged: (val) {
+                    setState(() {
+                      name = val;
+                    });
+                  },
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Full Name',
@@ -49,6 +56,11 @@ class _StudentRegisterState extends State<StudentRegister> {
               Padding(
                 padding: EdgeInsets.all(10),
                 child: TextField(
+                  onChanged: (val) {
+                    setState(() {
+                      email = val;
+                    });
+                  },
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'User Email',
@@ -58,6 +70,11 @@ class _StudentRegisterState extends State<StudentRegister> {
               Padding(
                 padding: EdgeInsets.all(10),
                 child: TextField(
+                  onChanged: (val) {
+                    setState(() {
+                      password = val;
+                    });
+                  },
                   obscureText: true,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
@@ -65,7 +82,9 @@ class _StudentRegisterState extends State<StudentRegister> {
                       hintText: 'Enter your secure password'),
                 ),
               ),
-              SizedBox(height: 27,),
+              SizedBox(
+                height: 27,
+              ),
               Container(
                 height: 50,
                 width: 250,
@@ -74,8 +93,9 @@ class _StudentRegisterState extends State<StudentRegister> {
                     borderRadius: BorderRadius.circular(20)),
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => StudentHome()));
+                    //Navigator.push(context,
+                    //  MaterialPageRoute(builder: (_) => StudentHome()));
+                    Database().checkEmail(email);
                   },
                   style: ButtonStyle(
                       backgroundColor:
@@ -95,8 +115,9 @@ class _StudentRegisterState extends State<StudentRegister> {
                   ),
                 ),
               ),
-              SizedBox(height: 28,),
-              
+              SizedBox(
+                height: 28,
+              ),
             ],
           ),
         ),
