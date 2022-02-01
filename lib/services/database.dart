@@ -1,9 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Database {
-  void checkEmail(String email) {
-    var result =
-        FirebaseFirestore.instance.collection('users').doc(email).get();
-    print(result.toString());
+  Future<void> studentEmailExists(String email) async {
+    var result = await FirebaseFirestore.instance
+        .collection('students')
+        .doc(email)
+        .get();
+    print("************************************\n" + result.toString());
+    print(result.exists);
+    //print(result.data().isEmpty);
   }
 }

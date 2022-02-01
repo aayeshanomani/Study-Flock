@@ -95,7 +95,7 @@ class _StudentRegisterState extends State<StudentRegister> {
                   onPressed: () {
                     //Navigator.push(context,
                     //  MaterialPageRoute(builder: (_) => StudentHome()));
-                    Database().checkEmail(email);
+                    Database().studentEmailExists(email);
                   },
                   style: ButtonStyle(
                       backgroundColor:
