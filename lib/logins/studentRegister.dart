@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shopoid/screens/studentScreens/home.dart';
 import 'package:shopoid/services/database.dart';
+import 'package:shopoid/widgets/dialogBox.dart';
 
 class StudentRegister extends StatefulWidget {
   const StudentRegister();
@@ -92,10 +93,22 @@ class _StudentRegisterState extends State<StudentRegister> {
                     color: Color(0xff36151E),
                     borderRadius: BorderRadius.circular(20)),
                 child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     //Navigator.push(context,
                     //  MaterialPageRoute(builder: (_) => StudentHome()));
-                    Database().studentEmailExists(email);
+                    if (!await Database().studentEmailExists(email)) {
+                      Map<String, dynamic> data = {
+                        "name": name,
+                        "email": email,
+                        "password": password
+                      };
+                      Database().createStudent(data);
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (_) => StudentHome()));
+                    } else {
+                      showAlertDialog(
+                          context, 'Sign up error', 'Email already exists');
+                    }
                   },
                   style: ButtonStyle(
                       backgroundColor:
