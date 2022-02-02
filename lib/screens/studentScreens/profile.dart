@@ -12,8 +12,15 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(38.0),
-      child: Container(
-        
+      child: SingleChildScrollView(
+        child: StreamBuilder<Object>(
+          stream: null,
+          builder: (context, snapshot) {
+            return Column(
+              
+            );
+          }
+        ),
       ),
     );
   }

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shopoid/logins/studentRegister.dart';
 import 'package:shopoid/screens/studentScreens/home.dart';
+import 'package:shopoid/services/database.dart';
+import 'package:shopoid/widgets/creds.dart';
+import 'package:shopoid/widgets/dialogBox.dart';
 
 class StudentLogin extends StatefulWidget {
   const StudentLogin();
@@ -10,6 +13,7 @@ class StudentLogin extends StatefulWidget {
 }
 
 class _StudentLoginState extends State<StudentLogin> {
+  String email = "", pass = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,6 +45,11 @@ class _StudentLoginState extends State<StudentLogin> {
               Padding(
                 padding: EdgeInsets.all(10),
                 child: TextField(
+                  onChanged: (value) {
+                    setState(() {
+                      email = value;
+                    });
+                  },
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'User Email',
@@ -50,6 +59,11 @@ class _StudentLoginState extends State<StudentLogin> {
               Padding(
                 padding: EdgeInsets.all(10),
                 child: TextField(
+                  onChanged: (value) {
+                    setState(() {
+                      pass = value;
+                    });
+                  },
                   obscureText: true,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
@@ -86,9 +100,17 @@ class _StudentLoginState extends State<StudentLogin> {
                     color: Color(0xff839788),
                     borderRadius: BorderRadius.circular(20)),
                 child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
+                    //if (await Database().loginStudent(email, pass)) {
+                    setState(() {
+                      globalEmail = email;
+                    });
                     Navigator.push(context,
                         MaterialPageRoute(builder: (_) => StudentHome()));
+                    //} else {
+                    showAlertDialog(
+                        context, 'Login Error', 'Wrong credentials!');
+                    //}
                   },
                   style: ButtonStyle(
                       backgroundColor:

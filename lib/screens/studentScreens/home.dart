@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shopoid/screens/studentScreens/profile.dart';
 import 'package:shopoid/screens/studentScreens/request.dart';
 
 class StudentHome extends StatefulWidget {
@@ -16,10 +17,7 @@ class _StudentHomeState extends State<StudentHome> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     StudentRequest(),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
+    Profile()
   ];
 
   void _onItemTapped(int index) {
@@ -48,8 +46,8 @@ class _StudentHomeState extends State<StudentHome> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(FontAwesomeIcons.userAlt),
-            label: 'Profile',
+            icon: Icon(FontAwesomeIcons.book),
+            label: 'Requests',
           ),
         ],
         currentIndex: _selectedIndex,
